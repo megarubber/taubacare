@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/mytextfield.dart';
+import '../widgets/mybutton.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -19,14 +20,27 @@ class _LoginState extends State<Login> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               MyTextField(
+                hintText: 'Login',
                 validatorText: 'eae',
                 validExp: r'',
                 width: size.width * 0.8
               ),
+              SizedBox(height: size.height * 0.01),
               MyTextField(
+                hintText: 'Senha',
                 validatorText: 'eae',
                 validExp: r'',
                 width: size.width * 0.8
+              ),
+              SizedBox(height: size.height * 0.01),
+              MyButton(
+                width: size.width * 0.8,
+                message: 'Fazer Login'
+              ),
+              SizedBox(height: size.height * 0.03),
+              MyButton(
+                width: size.width * 0.8,
+                message: 'Cadastro'
               ),
             ]
           )
