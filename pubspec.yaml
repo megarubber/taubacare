@@ -83,6 +83,10 @@ flutter:
   #      - asset: fonts/Poppins-Italic.ttf
         - asset: fonts/Poppins-SemiBold.ttf
           weight: 600
- 
+    - family: MonstserratAlternates
+      fonts:
+        - asset: font/MontserratAlternates-Medium.tff
+        - asset: font/MontserratAlternates-ExtraBold.tff
+          weight: 700
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
