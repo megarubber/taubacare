@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/login.dart';
+import 'screens/register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const Login()
+      initialRoute: '/login',
+      routes: {
+        '/login': (BuildContext context) => const Login(),
+        '/register': (BuildContext context) => const Register()
+      }
     );
   }
 }
