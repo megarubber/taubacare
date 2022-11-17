@@ -105,7 +105,8 @@ class _LoginState extends State<Login> {
                       width: size.width * 0.8,
                       height: size.height * 0.07,
                       message: 'Cadastro',
-                      color: Color(0xFF00BCD4)
+                      color: Color(0xFF00BCD4),
+                      action: () => Navigator.of(context).pushReplacementNamed('/register')
                     ),
                   ]
                 )
