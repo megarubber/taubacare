@@ -51,6 +51,14 @@ class _LoginState extends State<Login> {
                       child: Image.asset('assets/images/logo_taubacare.png'),
                     ),
                     SizedBox(height: size.height * 0.02),
+                    Text(
+                      'Fazer Login na Taubacare',
+                      style: TextStyle(
+                        fontFamily: 'MontserratAlternates',
+                        fontSize: 20
+                      )
+                    ),
+                    SizedBox(height: size.height * 0.02),
                     MyTextField(
                       hintText: 'Login',
                       validatorText: 'eae',
@@ -89,13 +97,15 @@ class _LoginState extends State<Login> {
                     MyButton(
                       width: size.width * 0.8,
                       height: size.height * 0.07,
-                      message: 'Fazer Login'
+                      message: 'Fazer Login',
+                      color: Color(0xFF00BCD4)
                     ),
                     SizedBox(height: size.height * 0.03),
                     MyButton(
                       width: size.width * 0.8,
                       height: size.height * 0.07,
-                      message: 'Cadastro'
+                      message: 'Cadastro',
+                      color: Color(0xFF00BCD4)
                     ),
                   ]
                 )
