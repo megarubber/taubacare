@@ -22,6 +22,7 @@ class MyTextField extends StatelessWidget {
       width: this.width,
       child: TextFormField(
         decoration: InputDecoration(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 15),
           fillColor: Colors.grey[300],
           filled: true,
           border: OutlineInputBorder(
