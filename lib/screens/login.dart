@@ -3,8 +3,8 @@ import '../widgets/mytextfield.dart';
 import '../widgets/mybutton.dart';
 import '../widgets/mycheckbox.dart';
 import '../widgets/circle.dart';
-
-enum UserType { naturalPerson, juridicalPerson }
+import '../utilities/usertype.dart';
+import '../utilities/colors.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -32,13 +32,13 @@ class _LoginState extends State<Login> {
                   diameter: 300.0, 
                   x: size.width * 0.5, 
                   y: size.height * -0.2,
-                  color: Color(0xFFFFA195)
+                  color: ProjectColors.lowRed
                 ),
                 Circle(
                   diameter: 300.0, 
                   x: size.width * -0.5, 
                   y: size.height * 0.7,
-                  color: Color(0xFFFFA195)
+                  color: ProjectColors.lowRed
                 ),
                 //Circle(diameter: 300.0, x: size.width * 0.8, y: 10),            
                 Column(
@@ -58,7 +58,7 @@ class _LoginState extends State<Login> {
                         fontSize: 20
                       )
                     ),
-                    SizedBox(height: size.height * 0.02),
+                    SizedBox(height: size.height * 0.05),
                     MyTextField(
                       hintText: 'Login',
                       validatorText: 'eae',
@@ -98,14 +98,14 @@ class _LoginState extends State<Login> {
                       width: size.width * 0.8,
                       height: size.height * 0.07,
                       message: 'Fazer Login',
-                      color: Color(0xFF00BCD4)
+                      color: ProjectColors.teal
                     ),
                     SizedBox(height: size.height * 0.03),
                     MyButton(
                       width: size.width * 0.8,
                       height: size.height * 0.07,
                       message: 'Cadastro',
-                      color: Color(0xFF00BCD4),
+                      color: ProjectColors.teal,
                       action: () => Navigator.of(context).pushReplacementNamed('/register')
                     ),
                   ]
