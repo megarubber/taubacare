@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class MyTextField extends StatelessWidget {
   final String validatorText;
@@ -6,13 +7,19 @@ class MyTextField extends StatelessWidget {
   final double width;
   final double height;
   final String hintText;
+  final String? formatter;
+  final TextInputType keyboardType;
+  final bool passwordMode;
 
   const MyTextField({
     required this.validatorText,
     required this.validExp,
     required this.width,
     this.height = 80,
-    this.hintText = 'My Text Field Class'
+    this.hintText = 'My Text Field Class',
+    this.formatter = null,
+    this.passwordMode = false,
+    this.keyboardType = TextInputType.text
   });
 
   @override
@@ -43,7 +50,12 @@ class MyTextField extends StatelessWidget {
           final RegExp regex = RegExp(this.validExp);
           if(!regex.hasMatch(value ?? '')) return this.validatorText;
           return null;
-        }
+        },
+        inputFormatters: this.formatter != null ? [MaskTextInputFormatter(mask: this.formatter)] : null,
+        keyboardType: this.keyboardType,
+        obscureText: this.passwordMode,
+        enableSuggestions: !this.passwordMode,
+        autocorrect: !this.passwordMode
       )
     );
   }
