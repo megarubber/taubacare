@@ -98,7 +98,8 @@ class _LoginState extends State<Login> {
                       width: size.width * 0.8,
                       height: size.height * 0.07,
                       message: 'Fazer Login',
-                      color: ProjectColors.teal
+                      color: ProjectColors.teal,
+                      action: () => Navigator.of(context).pushReplacementNamed('/home')
                     ),
                     SizedBox(height: size.height * 0.03),
                     MyButton(
