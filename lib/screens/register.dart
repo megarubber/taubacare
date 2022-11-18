@@ -8,12 +8,16 @@ class RegisterTextField extends StatelessWidget {
   final IconData icon;
   final String hintText;
   final String validatorText;
+  final String? formatter;
+  final bool passwordMode;
 
   RegisterTextField({
     Key? key, 
     required this.icon, 
     required this.hintText,
-    required this.validatorText
+    required this.validatorText,
+    this.formatter = null,
+    this.passwordMode = false
   }) : super(key: key);
   
   @override
@@ -34,7 +38,9 @@ class RegisterTextField extends StatelessWidget {
           hintText: this.hintText,
           width: size.width * 0.8,
           validExp: r'',
-          validatorText: this.validatorText
+          validatorText: this.validatorText,
+          formatter: this.formatter,
+          passwordMode: this.passwordMode
         )
       ]
     );
@@ -58,7 +64,10 @@ class _RegisterState extends State<Register> {
       backgroundColor: ProjectColors.teal,
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: const Text('Tela de Registro'),
+        title: const Text(
+          'Tela de Registro', 
+          style: TextStyle(fontFamily: 'MontserratAlternates', fontWeight: FontWeight.w700)
+        ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pushReplacementNamed('/login')
@@ -107,7 +116,8 @@ class _RegisterState extends State<Register> {
                   child: RegisterTextField(
                     validatorText: 'Digite um CPF válido!',
                     hintText: 'CPF',
-                    icon: Icons.card_travel
+                    icon: Icons.card_travel,
+                    formatter: '###.###.###-##'
                   ),
                   visible: _character == UserType.naturalPerson
                 ),
@@ -115,14 +125,16 @@ class _RegisterState extends State<Register> {
                   child: RegisterTextField(
                     validatorText: 'Digite um CNPJ válido!',
                     hintText: 'CNPJ',
-                    icon: Icons.card_travel
+                    icon: Icons.card_travel,
+                    formatter: '##.###.###/####-##'
                   ),
                   visible: _character == UserType.juridicalPerson
                 ),
                 RegisterTextField(
                   validatorText: 'Digite uma senha válida!',
                   hintText: 'Senha',
-                  icon: Icons.password_rounded
+                  icon: Icons.password_rounded,
+                  passwordMode: true
                 ),
                 MyButton(
                   width: size.width * 0.8,

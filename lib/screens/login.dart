@@ -60,7 +60,7 @@ class _LoginState extends State<Login> {
                     ),
                     SizedBox(height: size.height * 0.05),
                     MyTextField(
-                      hintText: 'Login',
+                      hintText: 'E-mail',
                       validatorText: 'eae',
                       validExp: r'',
                       width: size.width * 0.9,
@@ -71,9 +71,10 @@ class _LoginState extends State<Login> {
                       validatorText: 'eae',
                       validExp: r'',
                       width: size.width * 0.9,
+                      passwordMode: true
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 10),
+                      padding: const EdgeInsets.only(right: 10, bottom: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -93,7 +94,6 @@ class _LoginState extends State<Login> {
                         ]
                       ),
                     ),
-                    SizedBox(height: size.height * 0.01),
                     MyButton(
                       width: size.width * 0.8,
                       height: size.height * 0.07,
