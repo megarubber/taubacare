@@ -47,7 +47,27 @@ class _HomeState extends State<Home> {
         ),
         body: TabBarView(
           children: <Widget>[
-
+            SizedBox(  
+              child: Container(
+                padding: const EdgeInsets.all(30),
+                height: 180,
+                width: 150,
+                decoration: BoxDecoration(
+                  color: ProjectColors.red,
+                  borderRadius: BorderRadius.circular(20) 
+                )
+              )
+            ),
+            SizedBox(
+              child: Center(
+                child: Text('Tab Page 1'),
+              ),
+            ),
+            SizedBox(
+              child: Center(
+                child: Text('Tab Page 1'),
+              ),
+            ),
           ]
         ),
         drawer: Drawer(
@@ -69,6 +89,10 @@ class _HomeState extends State<Home> {
               ListTile(
                 leading: const Icon(Icons.person),
                 title: const Text('Ver Saldo')
+              ),
+              ListTile(
+                leading: const Icon(Icons.person),
+                title: const Text('Sair da conta')
               ),
             ]
           )
