@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "829649371200",
+    "project_id": "taubacare",
+    "storage_bucket": "taubacare.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829649371200:android:15f3f251e269ab345d5fa5",
+        "android_client_info": {
+          "package_name": "com.example.taubacare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829649371200-k5cqdl4q44ve4547nuub2snomvv9j8a0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxAjNlRgfmwydzRssURnJPuaGuZ5H77AM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829649371200-k5cqdl4q44ve4547nuub2snomvv9j8a0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
