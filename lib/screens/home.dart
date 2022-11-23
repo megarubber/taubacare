@@ -47,27 +47,17 @@ class _HomeState extends State<Home> {
         ),
         body: TabBarView(
           children: <Widget>[
-            SizedBox(  
-              child: Container(
-                padding: const EdgeInsets.all(30),
-                height: 180,
-                width: 150,
-                decoration: BoxDecoration(
-                  color: ProjectColors.red,
-                  borderRadius: BorderRadius.circular(20) 
+            Column(
+              children: <Widget>[
+                Container(
+                  padding: const EdgeInsets.all(30),
+                  decoration: BoxDecoration(
+                    color: ProjectColors.red,
+                    borderRadius: BorderRadius.circular(20) 
+                  )
                 )
-              )
-            ),
-            SizedBox(
-              child: Center(
-                child: Text('Tab Page 1'),
-              ),
-            ),
-            SizedBox(
-              child: Center(
-                child: Text('Tab Page 1'),
-              ),
-            ),
+              ]
+            )
           ]
         ),
         drawer: Drawer(
