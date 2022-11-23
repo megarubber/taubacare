@@ -6,11 +6,10 @@ class MyAlertDialog {
   final String message;
 
   const MyAlertDialog({
-    Key? key,
     required this.context,
     required this.title,
     required this.message
-  }) : super(key: key);
+  });
 
   void spawnConfirmAlert({VoidCallback? execute = null}) {
     showDialog(
