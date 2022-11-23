@@ -10,6 +10,7 @@ class MyTextField extends StatelessWidget {
   final String? formatter;
   final TextInputType keyboardType;
   final bool passwordMode;
+  final TextEditingController? controller;
 
   const MyTextField({
     required this.validatorText,
@@ -19,7 +20,8 @@ class MyTextField extends StatelessWidget {
     this.hintText = 'My Text Field Class',
     this.formatter = null,
     this.passwordMode = false,
-    this.keyboardType = TextInputType.text
+    this.keyboardType = TextInputType.text,
+    this.controller = null
   });
 
   @override
@@ -55,7 +57,8 @@ class MyTextField extends StatelessWidget {
         keyboardType: this.keyboardType,
         obscureText: this.passwordMode,
         enableSuggestions: !this.passwordMode,
-        autocorrect: !this.passwordMode
+        autocorrect: !this.passwordMode,
+        controller: this.controller
       )
     );
   }
