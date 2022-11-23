@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../widgets/mytextfield.dart';
 import '../widgets/mybutton.dart';
 import '../widgets/mycheckbox.dart';
 import '../widgets/circle.dart';
 import '../utilities/usertype.dart';
 import '../utilities/colors.dart';
+import '../services/authentication.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -16,6 +18,10 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   // Set a default value to force the user for one option
   UserType? _character = UserType.naturalPerson;
+  MyAuthentication _auth = MyAuthentication();
+
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +70,7 @@ class _LoginState extends State<Login> {
                       validatorText: 'eae',
                       validExp: r'',
                       width: size.width * 0.9,
+                      controller: this._emailController
                     ),
                     SizedBox(height: size.height * 0.01),
                     MyTextField(
@@ -71,8 +78,10 @@ class _LoginState extends State<Login> {
                       validatorText: 'eae',
                       validExp: r'',
                       width: size.width * 0.9,
-                      passwordMode: true
+                      passwordMode: true,
+                      controller: this._passwordController
                     ),
+                    /*
                     Padding(
                       padding: const EdgeInsets.only(right: 10, bottom: 10),
                       child: Row(
@@ -94,12 +103,20 @@ class _LoginState extends State<Login> {
                         ]
                       ),
                     ),
+                    */
                     MyButton(
                       width: size.width * 0.8,
                       height: size.height * 0.07,
                       message: 'Fazer Login',
                       color: ProjectColors.teal,
-                      action: () => Navigator.of(context).pushReplacementNamed('/home')
+                      //action: () => Navigator.of(context).pushReplacementNamed('/home')
+                      action: () async {
+                        final String result = await _auth.signInWithEmailAndPassword(
+                          email: this._emailController.text,
+                          password: this._passwordController.text
+                        );
+                        print(result);
+                      }
                     ),
                     SizedBox(height: size.height * 0.03),
                     MyButton(
