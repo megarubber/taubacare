@@ -3,6 +3,7 @@ import '../widgets/mytextfield.dart';
 import '../widgets/mybutton.dart';
 import '../utilities/usertype.dart';
 import '../utilities/colors.dart';
+import '../services/database.dart';
 
 class RegisterTextField extends StatelessWidget {
   final IconData icon;
@@ -10,6 +11,7 @@ class RegisterTextField extends StatelessWidget {
   final String validatorText;
   final String? formatter;
   final bool passwordMode;
+  final TextEditingController controller;
 
   RegisterTextField({
     Key? key, 
@@ -17,7 +19,8 @@ class RegisterTextField extends StatelessWidget {
     required this.hintText,
     required this.validatorText,
     this.formatter = null,
-    this.passwordMode = false
+    this.passwordMode = false,
+    required this.controller
   }) : super(key: key);
   
   @override
@@ -40,7 +43,8 @@ class RegisterTextField extends StatelessWidget {
           validExp: r'',
           validatorText: this.validatorText,
           formatter: this.formatter,
-          passwordMode: this.passwordMode
+          passwordMode: this.passwordMode,
+          controller: this.controller
         )
       ]
     );
@@ -56,6 +60,14 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   UserType? _character = UserType.naturalPerson;
+  MyDatabase _myDatabase = MyDatabase();
+
+  List<TextEditingController> _controllers = [
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -105,19 +117,22 @@ class _RegisterState extends State<Register> {
                 RegisterTextField(
                   validatorText: 'Digite um nome!',
                   hintText: 'Nome',
-                  icon: Icons.accessibility_new_rounded
+                  icon: Icons.accessibility_new_rounded,
+                  controller: _controllers[0]
                 ),
                 RegisterTextField(
                   validatorText: 'Digite um e-mail!',
                   hintText: 'Email',
-                  icon: Icons.alternate_email_rounded
+                  icon: Icons.alternate_email_rounded,
+                  controller: _controllers[1]
                 ),
                 Visibility(
                   child: RegisterTextField(
                     validatorText: 'Digite um CPF válido!',
                     hintText: 'CPF',
                     icon: Icons.card_travel,
-                    formatter: '###.###.###-##'
+                    formatter: '###.###.###-##',
+                    controller: _controllers[2]
                   ),
                   visible: _character == UserType.naturalPerson
                 ),
@@ -126,7 +141,8 @@ class _RegisterState extends State<Register> {
                     validatorText: 'Digite um CNPJ válido!',
                     hintText: 'CNPJ',
                     icon: Icons.card_travel,
-                    formatter: '##.###.###/####-##'
+                    formatter: '##.###.###/####-##',
+                    controller: _controllers[2]
                   ),
                   visible: _character == UserType.juridicalPerson
                 ),
@@ -134,13 +150,22 @@ class _RegisterState extends State<Register> {
                   validatorText: 'Digite uma senha válida!',
                   hintText: 'Senha',
                   icon: Icons.password_rounded,
-                  passwordMode: true
+                  passwordMode: true,
+                  controller: _controllers[3]
                 ),
                 MyButton(
                   width: size.width * 0.8,
                   message: 'Concluir',
                   color: ProjectColors.red,
-                  action: () {}
+                  action: () {
+                    _myDatabase.insertUser(
+                      name: _controllers[0].text,
+                      email: _controllers[1].text,
+                      cpfOrCpnj: _controllers[2].text,
+                      password: _controllers[3].text,
+                      isNaturalEntity: _character == UserType.naturalPerson
+                    );
+                  }
                 ),
               ]
             )
