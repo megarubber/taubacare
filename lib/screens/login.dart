@@ -7,6 +7,7 @@ import '../widgets/circle.dart';
 import '../utilities/usertype.dart';
 import '../utilities/colors.dart';
 import '../services/authentication.dart';
+import '../widgets/myalertdialog.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -115,7 +116,29 @@ class _LoginState extends State<Login> {
                           email: this._emailController.text,
                           password: this._passwordController.text
                         );
-                        print(result);
+                        switch(result) {
+                          case 'user-not-found':
+                            MyAlertDialog(
+                              context: context,
+                              title: 'Atenção!',
+                              message: 'Usuário não foi encontrado.',
+                            ).spawnConfirmAlert();
+                            break;
+                          case 'wrong-password':
+                            MyAlertDialog(
+                              context: context,
+                              title: 'Atenção!',
+                              message: 'Senha incorreta',
+                            ).spawnConfirmAlert();
+                            break;
+                          default:
+                            MyAlertDialog(
+                              context: context,
+                              title: 'Erro',
+                              message: 'Não foi possível fazer o login.',
+                            ).spawnConfirmAlert();
+                            break;
+                        }
                       }
                     ),
                     SizedBox(height: size.height * 0.03),
