@@ -4,6 +4,9 @@ import '../widgets/mybutton.dart';
 import '../utilities/usertype.dart';
 import '../utilities/colors.dart';
 import '../services/database.dart';
+import '../services/authentication.dart';
+import '../widgets/myalertdialog.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RegisterTextField extends StatelessWidget {
   final IconData icon;
@@ -23,7 +26,7 @@ class RegisterTextField extends StatelessWidget {
     required this.controller
   }) : super(key: key);
   
-  @override
+	@override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Row(
@@ -61,6 +64,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   UserType? _character = UserType.naturalPerson;
   MyDatabase _myDatabase = MyDatabase();
+	MyAuthentication _myAuth = MyAuthentication();
 
   List<TextEditingController> _controllers = [
     TextEditingController(),
@@ -158,13 +162,61 @@ class _RegisterState extends State<Register> {
                   message: 'Concluir',
                   color: ProjectColors.red,
                   action: () {
-                    _myDatabase.insertUser(
-                      name: _controllers[0].text,
-                      email: _controllers[1].text,
-                      cpfOrCpnj: _controllers[2].text,
-                      password: _controllers[3].text,
-                      isNaturalEntity: _character == UserType.naturalPerson
-                    );
+										int state = 99;
+										final RegExp exp = RegExp(r'^[a-zA-z]{1,}$');
+										for(int i = 0; i < _controllers.length; i++) {
+											if(!exp.hasMatch(_controllers[i].text))
+												state = i;
+												break;
+										}
+										
+										switch(state) {
+											case 0:
+												MyAlertDialog(
+													context: context,
+													title: 'Erro',
+													message: 'Digite um nome válido!'
+												).spawnConfirmAlert();
+												break;
+											case 1:
+												MyAlertDialog(
+													context: context,
+													title: 'Erro',
+													message: 'Digite um email válido!'
+												).spawnConfirmAlert();
+												break;
+											case 2:
+												MyAlertDialog(
+													context: context,
+													title: 'Erro',
+													message: 'Digite um CPF ou CPNJ válido!'
+												).spawnConfirmAlert();
+												break;
+											case 3:
+												MyAlertDialog(
+													context: context,
+													title: 'Erro',
+													message: 'Digite uma senha válida!'
+												).spawnConfirmAlert();
+												break;
+											default:
+												Fluttertoast.showToast(
+													msg: 'Cadastro concluído com sucesso!'
+												);									
+												_myDatabase.insertUser(
+													name: _controllers[0].text,
+													email: _controllers[1].text,
+													cpfOrCpnj: _controllers[2].text,
+													password: _controllers[3].text,
+													isNaturalEntity: _character == UserType.naturalPerson
+												);
+												_myAuth.createUserWithEmailAndPassword(
+													email: _controllers[1].text,
+													password: _controllers[2].text
+												);
+												Navigator.of(context).pushReplacementNamed('/login');
+												break;
+										}
                   }
                 ),
               ]
