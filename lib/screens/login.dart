@@ -34,7 +34,7 @@ class _LoginState extends State<Login> {
         child: Center(
           child: SingleChildScrollView( 
             child: Stack(
-              children: <Widget>[ 
+              children: <Widget>[
                 Circle(
                   diameter: 300.0, 
                   x: size.width * 0.5, 
@@ -131,6 +131,9 @@ class _LoginState extends State<Login> {
                               message: 'Senha incorreta',
                             ).spawnConfirmAlert();
                             break;
+													case 'success':
+														Navigator.of(context).pushReplacementNamed('/home');
+														break;
                           default:
                             MyAlertDialog(
                               context: context,
