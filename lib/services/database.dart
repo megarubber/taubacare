@@ -29,4 +29,12 @@ class MyDatabase {
       });
     }
   }
+	
+	void searchUsers([void Function(Object?)? f = null]) {
+		this.path = 'users';
+		dbRef.onValue.listen((DatabaseEvent event) {
+			final users = event.snapshot.value;
+			f?.call(users);
+		});
+	}
 }
