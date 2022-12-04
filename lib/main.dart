@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/login.dart';
 import 'screens/register.dart';
 import 'screens/home.dart';
+import 'screens/settings.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (BuildContext context) => const Login(),
         '/register': (BuildContext context) => const Register(),
-        '/home' : (BuildContext context) => const Home()
+        '/home' : (BuildContext context) => const Home(),
+				'/settings' : (BuildContext context) => Settings()
       }
     );
   }
