@@ -26,6 +26,12 @@ class _LoginState extends State<Login> {
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+	
+	@override
+	void initState() {
+		_database.searchUsers();
+		super.initState();
+	}
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +150,7 @@ class _LoginState extends State<Login> {
 																		Session.email = this._emailController.text;
 																	}
 																});
-															}
+															} else Session.name = 'user';
 														});
 														/*
 														if(Session.name != 'user') {
