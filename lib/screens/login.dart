@@ -7,7 +7,9 @@ import '../widgets/circle.dart';
 import '../utilities/usertype.dart';
 import '../utilities/colors.dart';
 import '../services/authentication.dart';
+import '../utilities/session.dart';
 import '../widgets/myalertdialog.dart';
+import '../services/database.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -20,6 +22,7 @@ class _LoginState extends State<Login> {
   // Set a default value to force the user for one option
   UserType? _character = UserType.naturalPerson;
   MyAuthentication _auth = MyAuthentication();
+	MyDatabase _database = MyDatabase();
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -132,6 +135,28 @@ class _LoginState extends State<Login> {
                             ).spawnConfirmAlert();
                             break;
 													case 'success':
+														_database.searchUsers((user) {
+															if(user != null) {
+																Map u = user as Map;
+																u.forEach((k, value) {
+																	if(value['email'] == this._emailController.text) {
+																		Session.name = value['name'];
+																		Session.email = this._emailController.text;
+																	}
+																});
+															}
+														});
+														/*
+														if(Session.name != 'user') {
+															Navigator.of(context).pushReplacementNamed('/home');
+														} else {
+															MyAlertDialog(
+																context: context,
+																title: 'Atenção!',
+                              	message: 'Usuário não foi encontrado.',
+															).spawnConfirmAlert();
+														}
+														*/
 														Navigator.of(context).pushReplacementNamed('/home');
 														break;
                           default:
