@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../services/database.dart';
 import '../utilities/colors.dart';
+import '../utilities/session.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -9,6 +11,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  MyDatabase _database = MyDatabase();
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -45,43 +49,35 @@ class _HomeState extends State<Home> {
             ]
           )
         ),
+				/*
         body: TabBarView(
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                Container(
-                  padding: const EdgeInsets.all(30),
-                  decoration: BoxDecoration(
-                    color: ProjectColors.red,
-                    borderRadius: BorderRadius.circular(20) 
-                  )
-                )
-              ]
-            )
-          ]
+          children: StreamBuilder(
+						
+					);
         ),
+				*/
         drawer: Drawer(
           child: ListView(
             children: <Widget>[
               UserAccountsDrawerHeader(
-                accountName: Text('oi'),
-                accountEmail: Text('eae'),
-                decoration: BoxDecoration(color: ProjectColors.white),
+                accountName: Text(Session.name),
+                accountEmail: Text(Session.email),
+                decoration: BoxDecoration(color: ProjectColors.lowRed),
                 currentAccountPicture: CircleAvatar(
                   radius: 50.0,
                   backgroundColor: ProjectColors.lowRed
                 )
               ),
               ListTile(
-                leading: const Icon(Icons.person),
-                title: const Text('Voltar')
+                leading: const Icon(Icons.house_rounded),
+                title: const Text('Cadastrar uma instituição')
               ),
               ListTile(
-                leading: const Icon(Icons.person),
-                title: const Text('Ver Saldo')
+                leading: const Icon(Icons.settings),
+                title: const Text('Configurações da conta')
               ),
               ListTile(
-                leading: const Icon(Icons.person),
+                leading: const Icon(Icons.logout_rounded),
                 title: const Text('Sair da conta')
               ),
             ]
