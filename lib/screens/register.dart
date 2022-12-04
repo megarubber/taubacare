@@ -200,21 +200,29 @@ class _RegisterState extends State<Register> {
 												).spawnConfirmAlert();
 												break;
 											default:
-												Fluttertoast.showToast(
-													msg: 'Cadastro concluído com sucesso!'
-												);									
-												_myDatabase.insertUser(
-													name: _controllers[0].text,
-													email: _controllers[1].text,
-													cpfOrCpnj: _controllers[2].text,
-													password: _controllers[3].text,
-													isNaturalEntity: _character == UserType.naturalPerson
-												);
-												_myAuth.createUserWithEmailAndPassword(
-													email: _controllers[1].text,
-													password: _controllers[2].text
-												);
-												Navigator.of(context).pushReplacementNamed('/login');
+												if(_controllers[3].text.length >= 6) {
+													Fluttertoast.showToast(
+														msg: 'Cadastro concluído com sucesso!'
+													);									
+													_myDatabase.insertUser(
+														name: _controllers[0].text,
+														email: _controllers[1].text,
+														cpfOrCpnj: _controllers[2].text,
+														password: _controllers[3].text,
+														isNaturalEntity: _character == UserType.naturalPerson
+													);
+													_myAuth.createUserWithEmailAndPassword(
+														email: _controllers[1].text,
+														password: _controllers[3].text
+													);
+													Navigator.of(context).pushReplacementNamed('/login');
+												} else {
+													MyAlertDialog(
+														context: context,
+														title: 'Erro',
+														message: 'A senha precisa ter 6 caracteres ou mais!'
+													).spawnConfirmAlert();
+												}
 												break;
 										}
                   }
