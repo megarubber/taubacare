@@ -63,3 +63,49 @@ class MyTextField extends StatelessWidget {
     );
   }
 }
+
+class RegisterTextField extends StatelessWidget {
+  final IconData icon;
+  final String hintText;
+  final String validatorText;
+  final String? formatter;
+  final bool passwordMode;
+  final TextEditingController controller;
+
+  RegisterTextField({
+    Key? key, 
+    required this.icon, 
+    required this.hintText,
+    required this.validatorText,
+    this.formatter = null,
+    this.passwordMode = false,
+    required this.controller
+  }) : super(key: key);
+  
+	@override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(bottom: 30),
+          child: Icon(this.icon, size: 50),
+        ),
+        SizedBox(
+          width: size.width * 0.01
+        ),
+        MyTextField(
+          hintText: this.hintText,
+          width: size.width * 0.8,
+          validExp: r'',
+          validatorText: this.validatorText,
+          formatter: this.formatter,
+          passwordMode: this.passwordMode,
+          controller: this.controller
+        )
+      ]
+    );
+  }
+}
