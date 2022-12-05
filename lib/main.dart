@@ -3,6 +3,7 @@ import 'screens/login.dart';
 import 'screens/register.dart';
 import 'screens/home.dart';
 import 'screens/settings.dart';
+import 'screens/register_organization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
         '/login': (BuildContext context) => const Login(),
         '/register': (BuildContext context) => const Register(),
         '/home' : (BuildContext context) => const Home(),
-				'/settings' : (BuildContext context) => Settings()
+				'/settings' : (BuildContext context) => Settings(),
+        '/register_organization' : (BuildContext context) => const RegisterOrganization(),
       }
     );
   }

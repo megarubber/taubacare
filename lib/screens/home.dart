@@ -70,15 +70,23 @@ class _HomeState extends State<Home> {
               ),
               ListTile(
                 leading: const Icon(Icons.house_rounded),
-                title: const Text('Cadastrar uma instituição')
+                title: const Text('Cadastrar uma instituição'),
+								onTap: () => Navigator.of(context).pushReplacementNamed('/register_organization')
               ),
               ListTile(
                 leading: const Icon(Icons.settings),
-                title: const Text('Configurações da conta')
+                title: const Text('Configurações da conta'),
+								onTap: () {
+									Navigator.of(context).pushReplacementNamed('/settings');
+								}
               ),
               ListTile(
                 leading: const Icon(Icons.logout_rounded),
-                title: const Text('Sair da conta')
+                title: const Text('Sair da conta'),
+								onTap: () {
+									Session.reset();
+									Navigator.of(context).pushReplacementNamed('/login');
+								}
               ),
             ]
           )
