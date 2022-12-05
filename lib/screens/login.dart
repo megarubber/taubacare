@@ -120,84 +120,72 @@ class _LoginState extends State<Login> {
 											maintainAnimation: true,
 											maintainState: true,
 											visible: !this._tryingLogin,
-											child: Column(
-												children: <Widget>[
-													MyButton(
-														width: size.width * 0.8,
-														height: size.height * 0.07,
-														message: 'Fazer Login',
-														color: ProjectColors.teal,
-														//action: () => Navigator.of(context).pushReplacementNamed('/home')
-														action: () async {
-															setState(() => this._tryingLogin = true);
-															final String result = await _auth.signInWithEmailAndPassword(
-																email: this._emailController.text,
-																password: this._passwordController.text
-															);
-															switch(result) {
-																case 'user-not-found':
-																	MyAlertDialog(
-																		context: context,
-																		title: 'Atenção!',
-																		message: 'Usuário não foi encontrado.',
-																	).spawnConfirmAlert();
-																	setState(() => this._tryingLogin = false);
-																	break;
-																case 'wrong-password':
-																	MyAlertDialog(
-																		context: context,
-																		title: 'Atenção!',
-																		message: 'Senha incorreta',
-																	).spawnConfirmAlert();
-																	setState(() => this._tryingLogin = false);
-																	break;
-																case 'success':
-																	_database.searchUsers((user) {
-																		if(user != null) {
-																			Map u = user as Map;
-																			u.forEach((k, value) {
-																				if(value['email'] == this._emailController.text) {
-																					Session.id = k;
-																					Session.name = value['name'];
-																					Session.email = this._emailController.text;
-																				}
-																			});
-																		} else Session.name = 'user';
+											child: MyButton(
+												width: size.width * 0.8,
+												height: size.height * 0.07,
+												message: 'Fazer Login',
+												color: ProjectColors.teal,
+												//action: () => Navigator.of(context).pushReplacementNamed('/home')
+												action: () async {
+													setState(() => this._tryingLogin = true);
+													final String result = await _auth.signInWithEmailAndPassword(
+														email: this._emailController.text,
+														password: this._passwordController.text
+													);
+													switch(result) {
+														case 'user-not-found':
+															MyAlertDialog(
+																context: context,
+																title: 'Atenção!',
+																message: 'Usuário não foi encontrado.',
+															).spawnConfirmAlert();
+															setState(() => this._tryingLogin = false);
+															break;
+														case 'wrong-password':
+															MyAlertDialog(
+																context: context,
+																title: 'Atenção!',
+																message: 'Senha incorreta',
+															).spawnConfirmAlert();
+															setState(() => this._tryingLogin = false);
+															break;
+														case 'success':
+															_database.searchUsers((user) {
+																if(user != null) {
+																	Map u = user as Map;
+																	u.forEach((k, value) {
+																		if(value['email'] == this._emailController.text) {
+																			Session.id = k;
+																			Session.name = value['name'];
+																			Session.email = this._emailController.text;
+																		}
 																	});
-																	/*
-																	if(Session.name != 'user') {
-																		Navigator.of(context).pushReplacementNamed('/home');
-																	} else {
-																		MyAlertDialog(
-																			context: context,
-																			title: 'Atenção!',
-																			message: 'Usuário não foi encontrado.',
-																		).spawnConfirmAlert();
-																	}
-																	*/
-																	Navigator.of(context).pushReplacementNamed('/home');
-																	break;
-																default:
-																	MyAlertDialog(
-																		context: context,
-																		title: 'Erro',
-																		message: 'Não foi possível fazer o login.',
-																	).spawnConfirmAlert();
-																	setState(() => this._tryingLogin = false);
-																	break;
+																} else Session.name = 'user';
+															});
+															/*
+															if(Session.name != 'user') {
+																Navigator.of(context).pushReplacementNamed('/home');
+															} else {
+																MyAlertDialog(
+																	context: context,
+																	title: 'Atenção!',
+																	message: 'Usuário não foi encontrado.',
+																).spawnConfirmAlert();
 															}
-														}
-													),
-													SizedBox(height: size.height * 0.03),
-													MyButton(
-														width: size.width * 0.8,
-														height: size.height * 0.07,
-														message: 'Cadastro',
-														color: ProjectColors.teal,
-														action: () => Navigator.of(context).pushReplacementNamed('/register')
-													),
-												]
-											)
+															*/
+															Navigator.of(context).pushReplacementNamed('/home');
+															break;
+														default:
+															MyAlertDialog(
+																context: context,
+																title: 'Erro',
+																message: 'Não foi possível fazer o login.',
+															).spawnConfirmAlert();
+															setState(() => this._tryingLogin = false);
+															break;
+													}
+												}
+											),
 										),
 										Visibility(
 											maintainSize: false,
@@ -205,8 +193,21 @@ class _LoginState extends State<Login> {
 											maintainState: true,
 											visible: this._tryingLogin,
 											child: CircularProgressIndicator()
+										),
+										SizedBox(height: size.height * 0.03),
+										MyButton(
+											width: size.width * 0.8,
+											height: size.height * 0.07,
+											message: 'Cadastro',
+											color: ProjectColors.teal,
+											action: () {
+												if(this._tryingLogin)
+													return null;
+												else
+													Navigator.of(context).pushReplacementNamed('/register');
+											}
 										)
-                  ]
+									]
                 )
               ]
             )
