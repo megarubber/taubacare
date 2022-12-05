@@ -1,4 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
+import '../utilities/session.dart';
 
 class MyDatabase {
   String path = 'default';
@@ -36,5 +37,10 @@ class MyDatabase {
 			final users = event.snapshot.value;
 			f?.call(users);
 		});
+	}
+
+	Future<void> updateUsername(String whichName) async {
+		this.path = 'users/' + Session.id;
+		await dbRef.update({'name': whichName});
 	}
 }
