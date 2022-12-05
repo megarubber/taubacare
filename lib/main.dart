@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         '/login': (BuildContext context) => const Login(),
         '/register': (BuildContext context) => const Register(),
         '/home' : (BuildContext context) => const Home(),
-				'/settings' : (BuildContext context) => Settings(),
+				'/settings' : (BuildContext context) => const Settings(),
         '/register_organization' : (BuildContext context) => const RegisterOrganization(),
       }
     );
