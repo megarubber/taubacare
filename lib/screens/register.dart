@@ -157,7 +157,7 @@ class _RegisterState extends State<Register> {
 												if(_controllers[3].text.length >= 6) {
 													Fluttertoast.showToast(
 														msg: 'Cadastro concluído com sucesso!'
-													);									
+													);
 													_myDatabase.insertUser(
 														name: _controllers[0].text,
 														email: _controllers[1].text,
