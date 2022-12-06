@@ -31,6 +31,19 @@ class MyDatabase {
     }
   }
 	
+  Future<void> insertOrganization({
+    required String name, required String email,
+    required String year, required String phone,
+  }) async {
+    this.path = 'organizations';
+		await dbRef.push().set({
+			'name': name,
+			'email': email,
+			'year': year,
+			'phone': phone,
+		});
+  }
+	
 	void searchUsers([void Function(Object?)? f = null]) {
 		this.path = 'users';
 		dbRef.onValue.listen((DatabaseEvent event) {
