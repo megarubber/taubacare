@@ -4,6 +4,7 @@ import '../widgets/mybutton.dart';
 import '../services/database.dart';
 import '../utilities/alltypes.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../utilities/colors.dart';
 
 class RegisterOrganization extends StatefulWidget {
 	const RegisterOrganization({Key? key}) : super(key: key);
@@ -27,8 +28,12 @@ class _RegisterOrganizationState extends State<RegisterOrganization> {
 	Widget build(BuildContext context) {
 		var size = MediaQuery.of(context).size;
 		return Scaffold(
+			backgroundColor: ProjectColors.lowRed,
 			resizeToAvoidBottomInset: true,
 			appBar: AppBar(
+				elevation: 0,
+				backgroundColor: ProjectColors.white,
+				foregroundColor: ProjectColors.black,
 				title: Text('Cadastro de instituição'),
 				leading: IconButton(
 					icon: Icon(Icons.arrow_back),
@@ -97,11 +102,11 @@ class _RegisterOrganizationState extends State<RegisterOrganization> {
 									message: 'Cadastrar',
 									action: () {
 										_database.insertOrganization(
-											name: this._controllers[0].text,
-											email: this._controllers[1].text,
-											year: this._controllers[2].text,
-											phone: this._controllers[3].text,
-											address: this._controllers[4].text,
+											name: this._controllers[0].text.toString(),
+											email: this._controllers[1].text.toString(),
+											year: this._controllers[2].text.toString(),
+											phone: this._controllers[3].text.toString(),
+											address: this._controllers[4].text.toString(),
 											type: this._org ?? OrganizationType.education
 										);
 										Fluttertoast.showToast(
