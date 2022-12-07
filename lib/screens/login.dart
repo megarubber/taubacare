@@ -4,7 +4,7 @@ import '../widgets/mytextfield.dart';
 import '../widgets/mybutton.dart';
 import '../widgets/mycheckbox.dart';
 import '../widgets/circle.dart';
-import '../utilities/usertype.dart';
+import '../utilities/alltypes.dart';
 import '../utilities/colors.dart';
 import '../services/authentication.dart';
 import '../utilities/session.dart';

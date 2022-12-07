@@ -21,13 +21,13 @@ class _SettingsState extends State<Settings> {
 	XFile? _image;
 	MyStorage _str = MyStorage();
 	MyDatabase _database = MyDatabase();
-
+	
 	Future<void> _selectImage() async {
 		final selectedImage = await _picker.pickImage(source: ImageSource.gallery);
 		if(selectedImage == null) return;
 		setState(() => this._image = selectedImage);
 	}
-	
+
 	Future<void> _updateInfo() async {
 		_str.uploadProfilePicture(File(this._image!.path), Session.name);
 		_database.updateUsername(this._nameController.text);
@@ -50,7 +50,7 @@ class _SettingsState extends State<Settings> {
 			appBar: AppBar(
 				title: Text('Configurações da conta'),
 				leading: IconButton(
-					icon: Icon(Icons.arrow_back_ios_rounded),
+					icon: Icon(Icons.arrow_back),
 					onPressed: () => Navigator.of(context).pushReplacementNamed('/home')
 				)
 			),
@@ -59,12 +59,13 @@ class _SettingsState extends State<Settings> {
 					child: Column(
 						mainAxisAlignment: MainAxisAlignment.center,
 						children: <Widget>[
+						/*
 							SizedBox(
 								width: size.width * 0.8,
 								height: size.height * 0.2,
-								child: this._image != null ? Image.file(File(this._image!.path)) :
-								Image.asset('assets/images/logo_taubacare.png')
+								child: Image.asset('')
 							),
+						*/
 							SizedBox(height: size.height * 0.03),
 							Text('Nome atual da conta'),
 							SizedBox(height: size.height * 0.03),

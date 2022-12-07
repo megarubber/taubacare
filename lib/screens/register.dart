@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/mytextfield.dart';
 import '../widgets/mybutton.dart';
-import '../utilities/usertype.dart';
+import '../utilities/alltypes.dart';
 import '../utilities/colors.dart';
 import '../services/database.dart';
 import '../services/authentication.dart';
