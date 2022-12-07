@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import '../utilities/session.dart';
+import '../utilities/alltypes.dart';
 
 class MyDatabase {
   String path = 'default';
@@ -34,14 +35,43 @@ class MyDatabase {
   Future<void> insertOrganization({
     required String name, required String email,
     required String year, required String phone,
+		required String address, required OrganizationType type
   }) async {
     this.path = 'organizations';
-		await dbRef.push().set({
-			'name': name,
-			'email': email,
-			'year': year,
-			'phone': phone,
-		});
+		switch(type) {
+			case OrganizationType.education:
+				await dbRef.push().set({
+					'name': name,
+					'email': email,
+					'year': year,
+					'phone': phone,
+					'address': address,
+					'type': 'education'
+				});
+				break;
+			case OrganizationType.assistance:
+				await dbRef.push().set({
+					'name': name,
+					'email': email,
+					'year': year,
+					'phone': phone,
+					'address': address,
+					'type': 'assistance'
+				});
+				break;
+			case OrganizationType.sports:
+				await dbRef.push().set({
+					'name': name,
+					'email': email,
+					'year': year,
+					'phone': phone,
+					'address': address,
+					'type': 'sports'
+				});
+				break;
+			default:
+				break;
+		}
   }
 	
 	void searchUsers([void Function(Object?)? f = null]) {
@@ -55,5 +85,11 @@ class MyDatabase {
 	Future<void> updateUsername(String whichName) async {
 		this.path = 'users/' + Session.id;
 		await dbRef.update({'name': whichName});
+	}
+
+	Future<Object?> getOrganizations() async {
+		this.path = 'organizations';
+		final snapshot = await dbRef.get();
+		return snapshot!.value;
 	}
 }
