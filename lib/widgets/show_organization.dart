@@ -13,7 +13,7 @@ class ShowOrganization extends StatelessWidget {
 		required this.address,
 		required this.contact,
 		required this.width,
-		required this.height
+		this.height = 120
 	});
 
 	@override
@@ -21,12 +21,33 @@ class ShowOrganization extends StatelessWidget {
 		return Container(
 			width: this.width,
 			height: this.height,
-			child: Column(
-				children: <Widget>[
-					Text(this.title),
-					Text(this.address),
-					Text(this.contact),
-				]
+			child: Padding(
+				padding: const EdgeInsets.all(15),
+				child: Column(
+					children: <Widget>[
+						Text(
+							this.title, 
+							style: TextStyle(
+								fontFamily: 'Poppins',
+								fontSize: 20
+							),
+						),
+						Text(
+							this.address,
+							style: TextStyle(
+								fontFamily: 'Poppins',
+								fontSize: 15
+							),
+						),
+						Text(
+							this.contact,
+							style: TextStyle(
+								fontFamily: 'Poppins',
+								fontSize: 15
+							),
+						),
+					]
+				)
 			),
 			decoration: const BoxDecoration(
 				color: ProjectColors.lowRed,
